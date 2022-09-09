@@ -1,8 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { App as TodoList } from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('To do list tests', () => {
+  it('should render a todo item to the screen', () => {
+    render(<TodoList />);
+  });
+
+  it('should render a correct Todo once form is submitted', () => {
+    render(<TodoList />);
+    const inputField = screen.getByTestId('input-field');
+    const submitButton = screen.getByTestId('submit-button');
+    fireEvent.change(inputField, { target: { value: 'Clean room' } });
+    fireEvent.click(submitButton);
+    const todo = screen.getByText('Clean room');
+    expect(todo).toBeInTheDocument();
+  });
 });
