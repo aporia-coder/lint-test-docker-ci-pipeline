@@ -31,7 +31,7 @@ export const App = () => {
     <div>
       {todos.map((todo, idx) => {
         return (
-          <div key={idx}>
+          <div key={todo.text}>
             <h1
               data-testid="todo-text"
               style={{ textDecoration: todo.isComplete ? 'line-through' : '' }}
